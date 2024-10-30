@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Plugin Name: %NAME%
+ * Description: Vote and share your votes on facebook for a %NAME%.
+ * Version: 1.1.0 beta
+ * Author: Datasub.com
+ * Plugin URI: http://www.datasub.com/widget
+ * Author URI: http://www.datasub.com
+ * License: GPLv2 or later
+*/
+
+
+add_action( 'widgets_init', '%CLASS%_load_widgets' );
+
+
+function %CLASS%_load_widgets() {
+	register_widget( '%CLASS%_Widget' );
+}
+
+
+class %CLASS%_Widget extends WP_Widget {
+
+	function %CLASS%_Widget() {
+		parent::WP_Widget(
+			'%CLASS%',
+			'%NAME%',
+			array( 'description' => '%NAME%' )
+		);
+	}
+
+	function widget($args, $instance) {
+		extract($args);
+		echo $before_widget;
+		if (get_option(strtolower('%CLASS%')."_widget_title")!='') {
+			echo "\n".$before_title; echo get_option(strtolower('%CLASS%')."_widget_title"); echo $after_title;
+		}
+		
+                echo '%CONTENT%';
+
+		echo $after_widget;
+	}
+	
+	function form($instance) {
+	}
+
+	function update($new_instance, $old_instance) {
+	}
+
+}
+
+?>
